@@ -17,7 +17,6 @@ namespace CCGMS.view
         private int SiblingCount = 0; // Initialize counter
 
 
-
         private async Task SaveFamilyData(StudentRecord record)
         {
             int familyId;

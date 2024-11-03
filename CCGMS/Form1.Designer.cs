@@ -32,28 +32,16 @@
             this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
             this.guna2ControlBox1 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-<<<<<<< HEAD
             this.guna2ProgressBar1 = new Guna.UI2.WinForms.Guna2ProgressBar();
             this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-=======
             this.guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
-            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
->>>>>>> 3704f8ab23207fdd643518222346f881406b63b5
             this.guna2ImageCheckBox1 = new Guna.UI2.WinForms.Guna2ImageCheckBox();
             this.guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-<<<<<<< HEAD
-            this.guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
             this.guna2AnimateWindow2 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
-=======
-            this.guna2AnimateWindow2 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
-            this.guna2ProgressBar1 = new Guna.UI2.WinForms.Guna2ProgressBar();
->>>>>>> 3704f8ab23207fdd643518222346f881406b63b5
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -83,19 +71,13 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-<<<<<<< HEAD
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-=======
->>>>>>> 3704f8ab23207fdd643518222346f881406b63b5
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
-<<<<<<< HEAD
-=======
             this.splitContainer1.Panel1.Controls.Add(this.guna2ProgressBar1);
->>>>>>> 3704f8ab23207fdd643518222346f881406b63b5
             this.splitContainer1.Panel1.Controls.Add(this.guna2HtmlLabel2);
             this.splitContainer1.Panel1.Controls.Add(this.guna2Button1);
             this.splitContainer1.Panel1.Controls.Add(this.guna2HtmlLabel1);
@@ -113,7 +95,6 @@
             this.splitContainer1.SplitterDistance = 299;
             this.splitContainer1.TabIndex = 1;
             // 
-<<<<<<< HEAD
             // guna2ProgressBar1
             // 
             this.guna2ProgressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -136,7 +117,6 @@
             this.guna2HtmlLabel2.Size = new System.Drawing.Size(165, 27);
             this.guna2HtmlLabel2.TabIndex = 7;
             this.guna2HtmlLabel2.Text = "Login to Continue";
-=======
             // guna2HtmlLabel1
             // 
             this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
@@ -146,7 +126,6 @@
             this.guna2HtmlLabel1.Size = new System.Drawing.Size(111, 23);
             this.guna2HtmlLabel1.TabIndex = 5;
             this.guna2HtmlLabel1.Text = "show password";
->>>>>>> 3704f8ab23207fdd643518222346f881406b63b5
             // 
             // guna2Button1
             // 
@@ -165,7 +144,6 @@
             this.guna2Button1.Text = "Continue";
             this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
-<<<<<<< HEAD
             // guna2HtmlLabel1
             // 
             this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
@@ -175,7 +153,6 @@
             this.guna2HtmlLabel1.Size = new System.Drawing.Size(111, 23);
             this.guna2HtmlLabel1.TabIndex = 5;
             this.guna2HtmlLabel1.Text = "show password";
-=======
             // guna2HtmlLabel2
             // 
             this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
@@ -185,7 +162,6 @@
             this.guna2HtmlLabel2.Size = new System.Drawing.Size(165, 27);
             this.guna2HtmlLabel2.TabIndex = 7;
             this.guna2HtmlLabel2.Text = "Login to Continue";
->>>>>>> 3704f8ab23207fdd643518222346f881406b63b5
             // 
             // guna2ImageCheckBox1
             // 
@@ -261,8 +237,6 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-<<<<<<< HEAD
-=======
             // guna2ProgressBar1
             // 
             this.guna2ProgressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -276,16 +250,12 @@
             this.guna2ProgressBar1.Text = "guna2ProgressBar1";
             this.guna2ProgressBar1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
             // 
->>>>>>> 3704f8ab23207fdd643518222346f881406b63b5
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(899, 517);
-<<<<<<< HEAD
             this.Controls.Add(this.guna2ProgressBar1);
-=======
->>>>>>> 3704f8ab23207fdd643518222346f881406b63b5
             this.Controls.Add(this.splitContainer1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";

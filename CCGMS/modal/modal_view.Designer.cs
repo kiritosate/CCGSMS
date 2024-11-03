@@ -78,11 +78,11 @@
             // 
             this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(21, 30);
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(21, 45);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(74, 22);
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(73, 22);
             this.guna2HtmlLabel1.TabIndex = 2;
-            this.guna2HtmlLabel1.Text = "temp_text";
+            this.guna2HtmlLabel1.Text = "temp_title";
             // 
             // guna2TextBox1
             // 
@@ -97,14 +97,14 @@
             this.guna2TextBox1.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.guna2TextBox1.ForeColor = System.Drawing.SystemColors.ControlText;
             this.guna2TextBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox1.Location = new System.Drawing.Point(30, 195);
+            this.guna2TextBox1.Location = new System.Drawing.Point(21, 127);
             this.guna2TextBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.guna2TextBox1.Name = "guna2TextBox1";
             this.guna2TextBox1.PasswordChar = '\0';
             this.guna2TextBox1.PlaceholderText = "";
             this.guna2TextBox1.ReadOnly = true;
             this.guna2TextBox1.SelectedText = "";
-            this.guna2TextBox1.Size = new System.Drawing.Size(257, 133);
+            this.guna2TextBox1.Size = new System.Drawing.Size(292, 133);
             this.guna2TextBox1.TabIndex = 3;
             this.guna2TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.guna2TextBox1.TextChanged += new System.EventHandler(this.guna2TextBox1_TextChanged);
@@ -134,7 +134,7 @@
         private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm1;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2TextBox guna2TextBox1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
     }
 }

@@ -123,6 +123,16 @@ namespace CCGMS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap done_208px {
+            get {
+                object obj = ResourceManager.GetObject("done_208px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap eye_500px {
             get {
                 object obj = ResourceManager.GetObject("eye_500px", resourceCulture);

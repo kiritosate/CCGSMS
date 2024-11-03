@@ -3419,7 +3419,7 @@
         private System.Windows.Forms.Label label79;
         private System.Windows.Forms.TextBox textBox105;
         private System.Windows.Forms.DataGridView dgvSiblings;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Name;
+        private new System.Windows.Forms.DataGridViewTextBoxColumn Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn Age;
         private System.Windows.Forms.DataGridViewTextBoxColumn School;
         private System.Windows.Forms.DataGridViewTextBoxColumn Educational_Attainment;

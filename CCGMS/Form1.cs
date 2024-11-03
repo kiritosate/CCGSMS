@@ -38,10 +38,6 @@ namespace CCGMS
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-=======
-            
->>>>>>> 3704f8ab23207fdd643518222346f881406b63b5
             MySqlConnection conn = MyCon.GetConnection();
 
             try
@@ -75,7 +71,6 @@ namespace CCGMS
             {
                 conn.Close();
             }
-<<<<<<< HEAD
         }
 
         private void InitializeDashboard()
@@ -86,7 +81,6 @@ namespace CCGMS
                 using (var connection = MyCon.GetConnection())
                 {
                     connection.Open(); // Attempt to open the connection
-                                       // Connection successful; you can perform any required initialization
                 }
 
                 // Simulate the initialization of all views
@@ -95,7 +89,7 @@ namespace CCGMS
                 {
                     // Simulate work (e.g., loading resources, setting up UI, etc.)
                     System.Threading.Thread.Sleep(300); // Simulate delay
-                    CheckDbCon();
+
                     // Safely update the progress bar on the UI thread
                     int progressValue = (i + 1) * 25; // Increment progress
                     this.Invoke((Action)(() =>
@@ -103,6 +97,13 @@ namespace CCGMS
                         guna2ProgressBar1.Value = progressValue; // Update the progress bar value
                     }));
                 }
+
+                // Show the dashboard after initialization completes
+                this.Invoke((Action)(() =>
+                {
+                    dashboard dashboard = new dashboard(); // Assuming Dashboard is the form you want to show
+                    dashboard.Show(); // Call showForm to display the Dashboard form
+                }));
             }
             catch (Exception ex)
             {
@@ -110,62 +111,9 @@ namespace CCGMS
                 {
                     MessageBox.Show("Error initializing dashboard: " + ex.Message);
                 }));
-                return; // Exit if an error occurs
-=======
-            
-        }
-        private void InitializeDashboard()
-        {
-            // Simulate some dashboard initialization work and update progress
-            for (int i = 0; i <= 100; i += 10)
-            {
-                // Simulate work (e.g., loading resources, setting up UI, etc.)
-                System.Threading.Thread.Sleep(300); // Simulate delay
-
-                // Safely update the progress bar on the UI thread
-                this.Invoke((Action)(() =>
-                {
-                    guna2ProgressBar1.Value = i; // Update the progress bar value
-                }));
->>>>>>> 3704f8ab23207fdd643518222346f881406b63b5
-            }
-
-            // After the initialization is complete, show the dashboard
-            this.Invoke((Action)(() =>
-            {
-<<<<<<< HEAD
-                dashboard frm = new dashboard();
-                frm.Show(); // Show the dashboard and hide the current form
-            }));
-        }
-
-        private bool CheckDbCon()
-        {
-            try
-            {
-                MySqlConnection con = MyCon.GetConnection();
-                con.Open();
-                con.Close();
-                return true;
-            }
-            catch
-            {
-                return false;
             }
         }
+        
 
-=======
-                dashboard dashboard = new dashboard();
-                showForm(dashboard); // Show the dashboard and hide the current form
-            }));
-        }
-
-
-        private void showForm(Form frms)
-        {
-            frms.Show();
-            this.Hide();
-        }
->>>>>>> 3704f8ab23207fdd643518222346f881406b63b5
     }
 }

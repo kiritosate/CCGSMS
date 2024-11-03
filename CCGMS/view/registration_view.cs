@@ -1,4 +1,5 @@
 ﻿using CCGMS.docs;
+using CCGMS.methods;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,26 +14,39 @@ namespace CCGMS.view
 {
     public partial class registration_view : Form
     {
+        private MyFetch fetchService;
         public registration_view()
         {
             InitializeComponent();
+            fetchService = new MyFetch();
         }
 
         private void guna2Button1_Click(object sender, EventArgs e)
         {
-<<<<<<< HEAD
             enrollment enrollment = new view.enrollment();
             enrollment.ShowDialog();
-=======
-            enrollment fm = new enrollment();
-            fm.ShowDialog();
->>>>>>> 3704f8ab23207fdd643518222346f881406b63b5
         }
 
         private void guna2Button2_Click(object sender, EventArgs e)
         {
             Word_Modifier modifier = new Word_Modifier();
             modifier.ModifyAndPrintDocument();
+        }
+
+        private void registration_view_Load(object sender, EventArgs e)
+        {
+            var studentRecords = fetchService.GetAllIndividualRecords();
+
+            // Format the data for display
+            string formattedData = fetchService.FormatStudentRecords(studentRecords);
+
+            // Display the data in the TextBox (assuming your TextBox is named txtDataDisplay)
+            textBox1.Text = formattedData;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
         }
     }
 }

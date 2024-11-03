@@ -63,35 +63,38 @@ namespace CCGMS
             }
         }
 
-        private void LoadFormInPanel(Form frm)
+        private async Task LoadFormInPanelAsync(Form frm)
         {
             // Ensure the panel is visible
             panel1.Visible = true;
-            
+
             // Clear existing controls in the panel before loading the new form
             panel1.Controls.Clear();
 
             // Set the form as a child of the panel
-            frm.TopLevel = false; // This is required to add the form to the panel
+            frm.TopLevel = false; // Required to add the form to the panel
             frm.FormBorderStyle = FormBorderStyle.None; // Remove borders
             frm.Dock = DockStyle.Fill; // Make the form fill the entire panel
 
-            // Add the form to the panel and show it
+            // Add the form to the panel but set opacity to 0 initially
             panel1.Controls.Add(frm);
-            frm.BringToFront(); // Bring the form to the front
-           
-            panel1.Controls.Add(frm);
-            
-            
-            // Show the form
+            frm.Opacity = 0; // Start with full transparency
             frm.Show();
+
+            // Gradually increase opacity to create a fade-in effect
+            for (double opacity = 0; opacity <= 1.0; opacity += 0.1)
+            {
+                await Task.Delay(50); // Wait for a short time between opacity changes
+                frm.Opacity = opacity;
+            }
+
+            // Ensure form is fully opaque
+            frm.Opacity = 1;
         }
 
-
-
-        private void guna2Button1_Click(object sender, EventArgs e)
+        private async void guna2Button1_Click(object sender, EventArgs e)
         {
-            LoadFormInPanel(new dashboard_view());
+            await LoadFormInPanelAsync(new dashboard_view());
         }
         private void guna2Button5_Click(object sender, EventArgs e)
         {
@@ -107,9 +110,34 @@ namespace CCGMS
             }
         }
 
-        private void guna2Button2_Click(object sender, EventArgs e)
+        private async void guna2Button2_Click(object sender, EventArgs e)
         {
-            LoadFormInPanel(new registration_view());
+            await LoadFormInPanelAsync(new registration_view());
+        }
+
+        private async void dashboard_Load(object sender, EventArgs e)
+        {
+            await LoadFormInPanelAsync(new dashboard_view());
+        }
+
+        private void guna2CircleButton2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void guna2Button3_Click(object sender, EventArgs e)
+        {
+            await LoadFormInPanelAsync(new records_view());
+        }
+
+        private async void guna2Button4_Click(object sender, EventArgs e)
+        {
+            await LoadFormInPanelAsync(new reports_view());
+        }
+
+        private void guna2ControlBox1_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

@@ -70,6 +70,8 @@
             // 
             this.guna2BorderlessForm1.ContainerControl = this;
             this.guna2BorderlessForm1.DockIndicatorTransparencyValue = 0.6D;
+            this.guna2BorderlessForm1.DragForm = false;
+            this.guna2BorderlessForm1.HasFormShadow = false;
             this.guna2BorderlessForm1.TransparentWhileDrag = true;
             // 
             // gunaAreaDataset1
@@ -203,9 +205,9 @@
             this.guna2HtmlLabel1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.guna2HtmlLabel1.Location = new System.Drawing.Point(12, 7);
             this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(137, 23);
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(141, 23);
             this.guna2HtmlLabel1.TabIndex = 0;
-            this.guna2HtmlLabel1.Text = "Admin/Dashboard";
+            this.guna2HtmlLabel1.Text = "Admin/ Dashboard";
             // 
             // dashboard_view
             // 
@@ -216,7 +218,7 @@
             this.Controls.Add(this.guna2Panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "dashboard_view";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "dashboard_view";
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);

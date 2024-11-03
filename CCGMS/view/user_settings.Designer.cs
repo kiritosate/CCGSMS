@@ -1,6 +1,6 @@
-﻿namespace CCGMS
+﻿namespace CCGMS.view
 {
-    partial class loading_form
+    partial class user_settings
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.guna2BorderlessForm1 = new Guna.UI2.WinForms.Guna2BorderlessForm(this.components);
-            this.guna2ProgressBar1 = new Guna.UI2.WinForms.Guna2ProgressBar();
+            this.guna2ControlBox1 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.SuspendLayout();
             // 
             // guna2BorderlessForm1
@@ -39,35 +39,30 @@
             this.guna2BorderlessForm1.DockIndicatorTransparencyValue = 0.6D;
             this.guna2BorderlessForm1.TransparentWhileDrag = true;
             // 
-            // guna2ProgressBar1
+            // guna2ControlBox1
             // 
-            this.guna2ProgressBar1.AutoRoundedCorners = true;
-            this.guna2ProgressBar1.BorderRadius = 4;
-            this.guna2ProgressBar1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.guna2ProgressBar1.Location = new System.Drawing.Point(0, 408);
-            this.guna2ProgressBar1.Name = "guna2ProgressBar1";
-            this.guna2ProgressBar1.ProgressColor = System.Drawing.Color.Lime;
-            this.guna2ProgressBar1.ProgressColor2 = System.Drawing.Color.Green;
-            this.guna2ProgressBar1.Size = new System.Drawing.Size(741, 10);
-            this.guna2ProgressBar1.TabIndex = 0;
-            this.guna2ProgressBar1.Text = "guna2ProgressBar1";
-            this.guna2ProgressBar1.TextMode = Guna.UI2.WinForms.Enums.ProgressBarTextMode.Value;
-            this.guna2ProgressBar1.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
+            this.guna2ControlBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.guna2ControlBox1.BorderRadius = 15;
+            this.guna2ControlBox1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.guna2ControlBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2ControlBox1.IconColor = System.Drawing.Color.White;
+            this.guna2ControlBox1.Location = new System.Drawing.Point(344, 12);
+            this.guna2ControlBox1.Name = "guna2ControlBox1";
+            this.guna2ControlBox1.Size = new System.Drawing.Size(30, 30);
+            this.guna2ControlBox1.TabIndex = 21;
+            this.guna2ControlBox1.Click += new System.EventHandler(this.guna2ControlBox1_Click);
             // 
-            // loading_form
+            // user_settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::CCGMS.Properties.Resources._262562341_430059162111243_1130028670816856864_n;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(741, 418);
-            this.Controls.Add(this.guna2ProgressBar1);
+            this.ClientSize = new System.Drawing.Size(386, 516);
+            this.Controls.Add(this.guna2ControlBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "loading_form";
+            this.Name = "user_settings";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "loading_form";
+            this.Text = "user_settings";
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.loading_form_Load);
             this.ResumeLayout(false);
 
         }
@@ -75,6 +70,6 @@
         #endregion
 
         private Guna.UI2.WinForms.Guna2BorderlessForm guna2BorderlessForm1;
-        private Guna.UI2.WinForms.Guna2ProgressBar guna2ProgressBar1;
+        private Guna.UI2.WinForms.Guna2ControlBox guna2ControlBox1;
     }
 }

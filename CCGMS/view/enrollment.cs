@@ -28,20 +28,19 @@ namespace CCGMS.view
 
                     // Save Father's Data
                     string fatherQuery = @"INSERT INTO tbl_family_data (Sub_Id,
-            Parents, Name, Tel_Cell_No, Nationality, Educational_Attainment, Occupation, 
+            Parents_Name, Tel_Cell_No, Nationality, Educational_Attainment, Occupation, 
             Employer_Agency, Working_Abroad, Marital_Status, Monthly_Income, 
             No_of_Children, Students_Birth_Order, Language_Dialect, 
             Family_Structure, Indigenous_Group, Beneficiary_4Ps) 
             VALUES (@Sub_Id,@Parents, @Name, @Tel_Cell_No, @Nationality, @Educational_Attainment, 
             @Occupation, @Employer_Agency, @Working_Abroad, @Marital_Status, 
             @Monthly_Income, @No_of_Children, @Students_Birth_Order, @Language_Dialect, 
-            @Family_Structure, @Indigenous_Group, @Beneficiary_4Ps);";
+            @Family_Structure, @Indigenous_Group, @4Ps_Beneficiary);";
 
                     using (var command = new MySqlCommand(fatherQuery, connection))
                     {
                         command.Parameters.AddWithValue("@Sub_Id", individualRecord.StudentID);
-                        command.Parameters.AddWithValue("@Parents", "Father");
-                        command.Parameters.AddWithValue("@Name", record.Father.Name);
+                        command.Parameters.AddWithValue("@Parents_Name", record.Father.Name);
                         command.Parameters.AddWithValue("@Tel_Cell_No", record.Father.TelCellNo);
                         command.Parameters.AddWithValue("@Nationality", record.Father.Nationality);
                         command.Parameters.AddWithValue("@Educational_Attainment", record.Father.EducationalAttainment);
@@ -55,7 +54,7 @@ namespace CCGMS.view
                         command.Parameters.AddWithValue("@Language_Dialect", record.Father.LanguageDialect);
                         command.Parameters.AddWithValue("@Family_Structure", record.Father.FamilyStructure);
                         command.Parameters.AddWithValue("@Indigenous_Group", record.Father.IndigenousGroup);
-                        command.Parameters.AddWithValue("@Beneficiary_4Ps", record.Father.Beneficiary4Ps);
+                        command.Parameters.AddWithValue("@4Ps_Beneficiary", record.Father.Beneficiary4Ps);
 
                         command.ExecuteNonQuery();
                     }
@@ -63,20 +62,19 @@ namespace CCGMS.view
 
                 // Save Mother's Data
                 string motherQuery = @"INSERT INTO tbl_family_data (Sub_Id
-            Parents, Name, Tel_Cell_No, Nationality, Educational_Attainment, Occupation, 
+            Parents_Name, Tel_Cell_No, Nationality, Educational_Attainment, Occupation, 
             Employer_Agency, Working_Abroad, Marital_Status, Monthly_Income, 
             No_of_Children, Students_Birth_Order, Language_Dialect, 
             Family_Structure, Indigenous_Group, Beneficiary_4Ps) 
             VALUES (@Sub_Id,@Parents, @Name, @Tel_Cell_No, @Nationality, @Educational_Attainment, 
             @Occupation, @Employer_Agency, @Working_Abroad, @Marital_Status, 
             @Monthly_Income, @No_of_Children, @Students_Birth_Order, @Language_Dialect, 
-            @Family_Structure, @Indigenous_Group, @Beneficiary_4Ps);";
+            @Family_Structure, @Indigenous_Group, @4Ps_Beneficiary);";
 
                     using (var command = new MySqlCommand(motherQuery, connection))
                     {
                         command.Parameters.AddWithValue("@Sub_Id", individualRecord.StudentID);
-                        command.Parameters.AddWithValue("@Parents", "Mother");
-                        command.Parameters.AddWithValue("@Name", record.Mother.Name);
+                        command.Parameters.AddWithValue("@Parents_Name", record.Mother.Name);
                         command.Parameters.AddWithValue("@Tel_Cell_No", record.Mother.TelCellNo);
                         command.Parameters.AddWithValue("@Nationality", record.Mother.Nationality);
                         command.Parameters.AddWithValue("@Educational_Attainment", record.Mother.EducationalAttainment);
@@ -90,7 +88,7 @@ namespace CCGMS.view
                         command.Parameters.AddWithValue("@Language_Dialect", record.Mother.LanguageDialect);
                         command.Parameters.AddWithValue("@Family_Structure", record.Mother.FamilyStructure);
                         command.Parameters.AddWithValue("@Indigenous_Group", record.Mother.IndigenousGroup);
-                        command.Parameters.AddWithValue("@Beneficiary_4Ps", record.Mother.Beneficiary4Ps);
+                        command.Parameters.AddWithValue("@4Ps_Beneficiary", record.Mother.Beneficiary4Ps);
 
                         command.ExecuteNonQuery();
                     }
@@ -107,11 +105,12 @@ namespace CCGMS.view
             using (var connection = MyCon.GetConnection())
             {
                 connection.Open();
-                string query = @"INSERT INTO tbl_brothers_sisters (Name, Age, School, Educational_Attainment, Employment_Business_Agency) 
+                string query = @"INSERT INTO tbl_brothers_sisters (Sub_Id, Name, Age, School, Educational_Attainment, Employment_Business_Agency) 
                          VALUES (@Name, @Age, @School, @EducationalAttainment, @EmploymentBusinessAgency);";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
+                    command.Parameters.AddWithValue("@Sub_Id", individualRecord.StudentID);
                     command.Parameters.AddWithValue("@Name", record.sibling.Name);
                     command.Parameters.AddWithValue("@Age", record.sibling.Age);
                     command.Parameters.AddWithValue("@School", record.sibling.School);
@@ -119,6 +118,11 @@ namespace CCGMS.view
                     command.Parameters.AddWithValue("@EmploymentBusinessAgency", record.sibling.EmploymentBusinessAgency);
 
                     command.ExecuteNonQuery();
+                }
+                
+                using (var command = new MySqlCommand("SELECT LAST_INSERT_ID();", connection))
+                {
+                    individualRecord.SiblingsID = Convert.ToInt32(command.ExecuteScalar());
                 }
             }
         }
@@ -569,7 +573,7 @@ namespace CCGMS.view
             var studentRecord = new StudentRecord
             {
                
-                PersonalInfo = new StudentRecord.PersonalData
+                PersonalInfo = new PersonalData
                 {
                     FirstName = txtFirstName.Text,
                     MiddleName = txtMiddleName.Text,
@@ -700,20 +704,17 @@ namespace CCGMS.view
             individualRecord.IsReentry = chkIsReEntry.Checked;
             individualRecord.IsShifter = chkIsShifter.Checked;
 
-            try
-            {
-                SaveStudentRecord(studentRecord);
-                SaveFamilyData(new StudentRecord { Father = fatherData, Mother = motherData });
-                SaveSiblingsData(studentRecord);  // Save siblings dynamically
-                SaveEducationalRecord(Education);
-                SaveHealthData(healthData);
-                SaveAdditionalProfile(additionalProfileData);
-                MessageBox.Show("Record saved successfully!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error saving student record: {ex.Message}");
-            }
+            
+            SaveStudentRecord(studentRecord);
+            SaveFamilyData(new StudentRecord { Father = fatherData, Mother = motherData });
+            SaveSiblingsData(studentRecord);  // Save siblings dynamically
+            SaveEducationalRecord(Education);
+            SaveHealthData(healthData);
+            SaveAdditionalProfile(additionalProfileData);
+            MessageBox.Show("Record saved successfully!");
+           
+               // MessageBox.Show($"Error saving student record: {ex.Message}");
+            
         }
     }
 }

@@ -14,14 +14,35 @@ namespace CCGMS
 {
     public partial class dashboard : Form
     {
+
+        private Form dashboardView;
+        private Form registrationView;
+        private Form enrollmentView;
+        private Form reportsView;
+        private Form recordsView;
+
         public dashboard()
         {
             InitializeComponent();
+
             timer1.Interval = 10; // Timer interval for smooth animation
             timer1.Tick += new EventHandler(timer1_Tick);
         }
+            /*
+            public dashboard(Form dashboardView, Form registrationView, Form enrollmentView,Form recordsView, Form reportsView)
+            {
+                InitializeComponent();
+                /*
+                this.dashboardView = dashboardView;
+                this.registrationView = registrationView;
+                this.enrollmentView = enrollmentView;
+                this.reportsView = reportsView;
+                this.recordsView = recordsView;
 
-        private void guna2CircleButton1_Click(object sender, EventArgs e)
+                timer1.Interval = 10; // Timer interval for smooth animation
+                timer1.Tick += new EventHandler(timer1_Tick);
+            }*/
+            private void guna2CircleButton1_Click(object sender, EventArgs e)
         {
         }
 
@@ -62,38 +83,68 @@ namespace CCGMS
                 }
             }
         }
-
-        private async Task LoadFormInPanelAsync(Form frm)
+        /*
+        private void ShowFormInDashboard(Form formToShow)
         {
-            // Ensure the panel is visible
-            panel1.Visible = true;
-
-            // Clear existing controls in the panel before loading the new form
-            panel1.Controls.Clear();
-
-            // Set the form as a child of the panel
-            frm.TopLevel = false; // Required to add the form to the panel
-            frm.FormBorderStyle = FormBorderStyle.None; // Remove borders
-            frm.Dock = DockStyle.Fill; // Make the form fill the entire panel
-
-            // Add the form to the panel but set opacity to 0 initially
-            panel1.Controls.Add(frm);
-            frm.Opacity = 0; // Start with full transparency
-            frm.Show();
-
-            // Gradually increase opacity to create a fade-in effect
-            for (double opacity = 0; opacity <= 1.0; opacity += 0.1)
+            if (this.InvokeRequired) // Check if the call is from a different thread
             {
-                await Task.Delay(50); // Wait for a short time between opacity changes
-                frm.Opacity = opacity;
+                this.Invoke(new Action(() => ShowFormInDashboard(formToShow)));
+                return; // Return early to prevent further execution
             }
 
-            // Ensure form is fully opaque
-            frm.Opacity = 1;
+            // Close any existing forms in the panel if necessary
+            foreach (Control control in this.Controls)
+            {
+                if (control is Form existingForm && existingForm != formToShow) // Exclude the form to show
+                {
+                    existingForm.Close(); // Close the existing form
+                }
+            }
+
+            // Show the form in a panel or as a standalone
+            formToShow.TopLevel = false; // Set to false if you want to show it in a panel
+            formToShow.FormBorderStyle = FormBorderStyle.None; // Remove borders if needed
+            formToShow.Dock = DockStyle.Fill; // Fill the panel or form
+            panel1.Controls.Add(formToShow); // Add to the current form's controls
+            formToShow.Show(); // Show the form
         }
+        
+        private async Task LoadFormInPanelAsync(Form form)
+        {
+            await Task.Run(() =>
+            {
+                // Simulate some background work
+                System.Threading.Thread.Sleep(300); // Replace with actual loading logic
+            });
+
+            ShowFormInDashboard(form); // Show the form safely
+        }
+         */
+
+        private async Task LoadFormInPanelAsync(Form form)
+        {
+            // Clear existing controls from the panel
+            panel1.Controls.Clear();
+
+            // Set up the form to fit within the panel
+            form.TopLevel = false;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.Dock = DockStyle.Fill;
+
+            // Add the form to the panel and display it
+            panel1.Controls.Add(form);
+            form.Show();
+
+            // Simulate an asynchronous load (if needed)
+            await Task.Delay(300); // Adjust delay as needed
+        }
+
+
+        
 
         private async void guna2Button1_Click(object sender, EventArgs e)
         {
+            //await LoadFormInPanelAsync(Form1.dash);
             await LoadFormInPanelAsync(new dashboard_view());
         }
         private void guna2Button5_Click(object sender, EventArgs e)

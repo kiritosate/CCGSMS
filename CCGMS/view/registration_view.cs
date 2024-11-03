@@ -18,6 +18,7 @@ namespace CCGMS.view
     {
         private BindingSource bindingSource = new BindingSource();
         private MyFetch fetchService;
+        private String StudentId;
         public registration_view()
         {
             InitializeComponent();
@@ -108,6 +109,14 @@ namespace CCGMS.view
             {
                 int columnIndex = e.ColumnIndex;
 
+                DataGridViewRow row = guna2DataGridView1.Rows[e.RowIndex];
+
+                // Find the column index for "StudentId" column by name
+                int studentIdColumnIndex = guna2DataGridView1.Columns["Student_Id"].Index;
+
+                // Retrieve the StudentId value based on its column index
+                StudentId = row.Cells[studentIdColumnIndex].Value?.ToString() ?? "N/A";
+
                 // Check if the clicked column is one of the action columns
                 if (guna2DataGridView1.Columns[columnIndex].Name == "imgView")
                 {
@@ -121,6 +130,8 @@ namespace CCGMS.view
                 {
                     MessageBox.Show("You clicked to delete the record.");
                 }
+
+                //MessageBox.Show($"Student Id: {StudentId}: {row.Cells[1]}");
             }
         }
 

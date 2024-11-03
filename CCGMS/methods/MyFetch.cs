@@ -32,6 +32,28 @@ namespace CCGMS.methods
             return dataAdapter;
         }
 
+        public MySqlDataAdapter GetIndividualData()
+        {
+            string query = @"
+            SELECT 
+                ir.Student_ID,
+                ir.Course,
+                ir.Year,
+                pd.Firstname,
+                pd.Middlename,
+                pd.Lastname,
+                pd.Sex
+            FROM 
+                tbl_Individual_Record ir
+            JOIN 
+                tbl_Personal_Data pd ON ir.Personal_Data_ID = pd.Personal_Data_ID
+             WHERE
+                ir.Status = 1;"; // Filtering for active records
+
+            MySqlDataAdapter dataAdapter = new MySqlDataAdapter(query, MyCon.GetConnection());
+            return dataAdapter;
+        }
+
         public Dictionary<string, int> GetStudentCountByYearAndSex()
         {
             var studentCountDictionary = new Dictionary<string, int>();

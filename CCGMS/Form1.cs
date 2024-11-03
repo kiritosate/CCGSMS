@@ -1,4 +1,5 @@
 ﻿using CCGMS.methods;
+using CCGMS.view;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,13 @@ namespace CCGMS
         {
             InitializeComponent();
         }
+
+        public dashboard_view dashboardView;
+        public registration_view registrationView;
+        public enrollment enrollmentView;
+        public dashboard mainDashboard;
+        public reports_view reportsView;
+        public records_view recordsView;
 
         private void guna2ControlBox1_Click(object sender, EventArgs e)
         {
@@ -56,7 +64,7 @@ namespace CCGMS
                 {
                     // Hide the login form
                     this.Hide();
-                    Task.Run(() => InitializeDashboard());
+                    Task.Run(() => InitializeDashboard2());
                 }
                 else
                 {
@@ -73,7 +81,8 @@ namespace CCGMS
             }
         }
 
-        private void InitializeDashboard()
+
+        private void InitializeDashboard2()
         {
             try
             {
@@ -83,26 +92,22 @@ namespace CCGMS
                     connection.Open(); // Attempt to open the connection
                 }
 
-                // Simulate the initialization of all views
-                string[] viewsToInitialize = { "DashboardView", "RegistrationView", "EnrollmentView", "Dashboard" };
-                for (int i = 0; i < viewsToInitialize.Length; i++)
-                {
-                    // Simulate work (e.g., loading resources, setting up UI, etc.)
-                    System.Threading.Thread.Sleep(300); // Simulate delay
+                /* Initialize and preload the forms without showing them
+                dashboardView = new dashboard_view();
+                registrationView = new registration_view();
+                enrollmentView = new enrollment();
+                recordsView = new records_view();
+                reportsView = new reports_view();*/
 
-                    // Safely update the progress bar on the UI thread
-                    int progressValue = (i + 1) * 25; // Increment progress
-                    this.Invoke((Action)(() =>
-                    {
-                        guna2ProgressBar1.Value = progressValue; // Update the progress bar value
-                    }));
-                }
+                //Form[] formsToInitialize = { dashboardView, registrationView, enrollmentView, recordsView, reportsView };
+                //int totalForms = formsToInitialize.Length;
+                //int progressIncrement = 100 / totalForms;
 
-                // Show the dashboard after initialization completes
+                // Show the main dashboard form after initialization
                 this.Invoke((Action)(() =>
                 {
-                    dashboard dashboard = new dashboard(); // Assuming Dashboard is the form you want to show
-                    dashboard.Show(); // Call showForm to display the Dashboard form
+                    mainDashboard = new dashboard();
+                    mainDashboard.Show(); // Show the main dashboard form
                 }));
             }
             catch (Exception ex)
@@ -113,7 +118,18 @@ namespace CCGMS
                 }));
             }
         }
-        
+
+        private void UpdateProgressBar(int value)
+        {
+            if (guna2ProgressBar1.InvokeRequired)
+            {
+                guna2ProgressBar1.Invoke(new Action(() => UpdateProgressBar(value)));
+            }
+            else
+            {
+                guna2ProgressBar1.Value = value; // Update the progress bar value
+            }
+        }
 
     }
 }

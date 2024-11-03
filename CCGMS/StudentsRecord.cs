@@ -39,16 +39,27 @@ namespace CCGMS
             public string AdminPassword { get; set; }
         }
 
-        // A. Personal Data
-        public class PersonalData
+        public class IndividualRecord
         {
-            public string StudentId { get; set; }
+            public int StudentID { get; set; }
             public string Course { get; set; }
             public int Year { get; set; }
             public bool IsNewStudent { get; set; }
-            public bool IsTransferee { get; set; }
-            public bool IsReEntry { get; set; }
+            public bool IsTransferree { get; set; }
+            public bool IsReentry { get; set; }
             public bool IsShifter { get; set; }
+            public int PersonalDataID { get; set; }
+            public int FamilyDataID { get; set; }
+            public int SiblingsID { get; set; }
+            public int EducationalID { get; set; }
+            public int AdditionalProfileID { get; set; }
+            public int HealthDataID { get; set; }
+        }
+
+
+        // A. Personal Data
+        public class PersonalData
+        {
             public string FirstName { get; set; }
             public string MiddleName { get; set; }
             public string LastName { get; set; }

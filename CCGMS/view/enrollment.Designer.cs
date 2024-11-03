@@ -60,7 +60,6 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.txtCivilStatus = new System.Windows.Forms.TextBox();
             this.dtpDateOfBirth = new System.Windows.Forms.DateTimePicker();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -260,6 +259,7 @@
             this.guna2ControlBox1 = new Guna.UI2.WinForms.Guna2ControlBox();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.txtCivilStatus = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -315,6 +315,7 @@
             // tabPage1
             // 
             this.tabPage1.AutoScroll = true;
+            this.tabPage1.Controls.Add(this.txtCivilStatus);
             this.tabPage1.Controls.Add(this.numericUpDown2);
             this.tabPage1.Controls.Add(this.txtGuardianphone);
             this.tabPage1.Controls.Add(this.txtHobbies);
@@ -342,7 +343,6 @@
             this.tabPage1.Controls.Add(this.checkBox2);
             this.tabPage1.Controls.Add(this.checkBox1);
             this.tabPage1.Controls.Add(this.label9);
-            this.tabPage1.Controls.Add(this.txtCivilStatus);
             this.tabPage1.Controls.Add(this.dtpDateOfBirth);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.label7);
@@ -647,15 +647,6 @@
             this.label9.Size = new System.Drawing.Size(86, 21);
             this.label9.TabIndex = 134;
             this.label9.Text = "Civil Status";
-            // 
-            // txtCivilStatus
-            // 
-            this.txtCivilStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtCivilStatus.Location = new System.Drawing.Point(361, 106);
-            this.txtCivilStatus.Margin = new System.Windows.Forms.Padding(2);
-            this.txtCivilStatus.Name = "txtCivilStatus";
-            this.txtCivilStatus.Size = new System.Drawing.Size(77, 29);
-            this.txtCivilStatus.TabIndex = 133;
             // 
             // dtpDateOfBirth
             // 
@@ -3004,6 +2995,19 @@
             this.guna2Button1.Text = "Clear Form";
             this.guna2Button1.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             // 
+            // txtCivilStatus
+            // 
+            this.txtCivilStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCivilStatus.FormattingEnabled = true;
+            this.txtCivilStatus.Items.AddRange(new object[] {
+            "Single",
+            "Married",
+            "Widowed"});
+            this.txtCivilStatus.Location = new System.Drawing.Point(354, 104);
+            this.txtCivilStatus.Name = "txtCivilStatus";
+            this.txtCivilStatus.Size = new System.Drawing.Size(199, 29);
+            this.txtCivilStatus.TabIndex = 10;
+            // 
             // enrollment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3092,7 +3096,6 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtCivilStatus;
         private System.Windows.Forms.DateTimePicker dtpDateOfBirth;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
@@ -3280,5 +3283,6 @@
         private Guna.UI2.WinForms.Guna2ControlBox guna2ControlBox1;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private System.Windows.Forms.ComboBox txtCivilStatus;
     }
 }

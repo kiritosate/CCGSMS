@@ -118,23 +118,26 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="administrative_tools_500px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\administrative_tools_500px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="add_500px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\add_500px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="search_500px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\search_500px1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="menu_500px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\menu_500px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="done_208px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\done_208px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="collapse_500px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\collapse_500px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="sheet_of_paper_500px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sheet_of_paper_500px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="person_500px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\person_500px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="search_500px1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\search_500px1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="add_500px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\add_500px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="262562341_430059162111243_1130028670816856864_n" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\262562341_430059162111243_1130028670816856864_n.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="moleskine_500px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\moleskine_500px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -166,16 +169,22 @@
   <data name="eye_500px" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\eye_500px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="person_500px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\person_500px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="administrative_tools_500px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\administrative_tools_500px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="262562341_430059162111243_1130028670816856864_n" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\262562341_430059162111243_1130028670816856864_n.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="sheet_of_paper_500px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sheet_of_paper_500px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="COUNSELING" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\COUNSELING.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="done_208px" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\done_208px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pencil_96px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pencil_96px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="eye_96px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\eye_96px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="delete_trash_96px" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\delete_trash_96px.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

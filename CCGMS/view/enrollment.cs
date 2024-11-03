@@ -1,4 +1,5 @@
 ﻿using CCGMS.methods;
+using DocumentFormat.OpenXml.Bibliography;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -15,31 +16,30 @@ namespace CCGMS.view
         private List<TextBox> siblingAgeTextBoxes = new List<TextBox>();
         // Add more lists as needed for other fields
         private int SiblingCount = 0; // Initialize counter
+        private IndividualRecord individualRecord;
 
-
-        private async Task SaveFamilyData(StudentRecord record)
+        private void SaveFamilyData(StudentRecord record)
         {
-            int familyId;
-
-            await Task.Run(() =>
-            {
+                int familyId;
+            
                 using (var connection = MyCon.GetConnection())
                 {
                     connection.Open();
 
                     // Save Father's Data
-                    string fatherQuery = @"INSERT INTO tbl_family_data (
+                    string fatherQuery = @"INSERT INTO tbl_family_data (Sub_Id,
             Parents, Name, Tel_Cell_No, Nationality, Educational_Attainment, Occupation, 
             Employer_Agency, Working_Abroad, Marital_Status, Monthly_Income, 
             No_of_Children, Students_Birth_Order, Language_Dialect, 
             Family_Structure, Indigenous_Group, Beneficiary_4Ps) 
-            VALUES (@Parents, @Name, @Tel_Cell_No, @Nationality, @Educational_Attainment, 
+            VALUES (@Sub_Id,@Parents, @Name, @Tel_Cell_No, @Nationality, @Educational_Attainment, 
             @Occupation, @Employer_Agency, @Working_Abroad, @Marital_Status, 
             @Monthly_Income, @No_of_Children, @Students_Birth_Order, @Language_Dialect, 
             @Family_Structure, @Indigenous_Group, @Beneficiary_4Ps);";
 
                     using (var command = new MySqlCommand(fatherQuery, connection))
                     {
+                        command.Parameters.AddWithValue("@Sub_Id", individualRecord.StudentID);
                         command.Parameters.AddWithValue("@Parents", "Father");
                         command.Parameters.AddWithValue("@Name", record.Father.Name);
                         command.Parameters.AddWithValue("@Tel_Cell_No", record.Father.TelCellNo);
@@ -59,25 +59,22 @@ namespace CCGMS.view
 
                         command.ExecuteNonQuery();
                     }
-                    using (var command = new MySqlCommand("SELECT LAST_INSERT_ID();", connection))
-                    {
-                        familyId = Convert.ToInt32(command.ExecuteScalar());
-                    }
 
 
-                    // Save Mother's Data
-                    string motherQuery = @"INSERT INTO tbl_family_data (
+                // Save Mother's Data
+                string motherQuery = @"INSERT INTO tbl_family_data (Sub_Id
             Parents, Name, Tel_Cell_No, Nationality, Educational_Attainment, Occupation, 
             Employer_Agency, Working_Abroad, Marital_Status, Monthly_Income, 
             No_of_Children, Students_Birth_Order, Language_Dialect, 
             Family_Structure, Indigenous_Group, Beneficiary_4Ps) 
-            VALUES (@Parents, @Name, @Tel_Cell_No, @Nationality, @Educational_Attainment, 
+            VALUES (@Sub_Id,@Parents, @Name, @Tel_Cell_No, @Nationality, @Educational_Attainment, 
             @Occupation, @Employer_Agency, @Working_Abroad, @Marital_Status, 
             @Monthly_Income, @No_of_Children, @Students_Birth_Order, @Language_Dialect, 
             @Family_Structure, @Indigenous_Group, @Beneficiary_4Ps);";
 
                     using (var command = new MySqlCommand(motherQuery, connection))
                     {
+                        command.Parameters.AddWithValue("@Sub_Id", individualRecord.StudentID);
                         command.Parameters.AddWithValue("@Parents", "Mother");
                         command.Parameters.AddWithValue("@Name", record.Mother.Name);
                         command.Parameters.AddWithValue("@Tel_Cell_No", record.Mother.TelCellNo);
@@ -97,9 +94,12 @@ namespace CCGMS.view
 
                         command.ExecuteNonQuery();
                     }
-                }
-            });
 
+                using (var command = new MySqlCommand("SELECT LAST_INSERT_ID();", connection))
+                {
+                    individualRecord.FamilyDataID = Convert.ToInt32(command.ExecuteScalar());
+                }  
+            }
         }
         private void SaveSiblingData(StudentRecord record)
         {
@@ -131,7 +131,6 @@ namespace CCGMS.view
                 connection.Open();
 
                 string query = @"INSERT INTO tbl_personal_data (
-            StudentID, Course_, Year_, IsNewStudent, IsTransferee, IsReEntry, IsShifter,
             Firstname, Middlename, Lastname, Sex, Age, Nickname, Nationality, 
             Citizenship, Date_of_Birth, Place_of_Birth, Civil_status, Spouse_Name, 
             Religion, Contact_No, Complete_Home_Address, Boarding_House_Address, 
@@ -144,15 +143,6 @@ namespace CCGMS.view
 
                 using (var command = new MySqlCommand(query, connection))
                 {
-                    // Parameter assignments for new fields
-                    command.Parameters.AddWithValue("@StudentId", record.PersonalInfo.StudentId);
-                    command.Parameters.AddWithValue("@Course", record.PersonalInfo.Course);
-                    command.Parameters.AddWithValue("@Year", record.PersonalInfo.Year);
-                    command.Parameters.AddWithValue("@IsNewStudent", record.PersonalInfo.IsNewStudent);
-                    command.Parameters.AddWithValue("@IsTransferee", record.PersonalInfo.IsTransferee);
-                    command.Parameters.AddWithValue("@IsReEntry", record.PersonalInfo.IsReEntry);
-                    command.Parameters.AddWithValue("@IsShifter", record.PersonalInfo.IsShifter);
-
                     // Parameter assignments for existing fields
                     command.Parameters.AddWithValue("@Firstname", record.PersonalInfo.FirstName);
                     command.Parameters.AddWithValue("@Middlename", record.PersonalInfo.MiddleName);
@@ -176,8 +166,16 @@ namespace CCGMS.view
                     command.Parameters.AddWithValue("@Hobbies", record.PersonalInfo.Hobbies);
 
                     command.ExecuteNonQuery();
+                    
+                }
+
+                using (var command = new MySqlCommand("SELECT LAST_INSERT_ID();", connection))
+                {
+                    individualRecord.PersonalDataID = Convert.ToInt32(command.ExecuteScalar());
                 }
             }
+            
+            
         }
 
         private void SaveEducationalRecord(EducationalData Education)
@@ -230,6 +228,11 @@ namespace CCGMS.view
 
                     command.ExecuteNonQuery();
                 }
+
+                using (var command = new MySqlCommand("SELECT LAST_INSERT_ID();", connection))
+                {
+                    individualRecord.EducationalID = Convert.ToInt32(command.ExecuteScalar());
+                }
             }
         }
         private void SaveHealthData(HealthData healthData)
@@ -260,6 +263,11 @@ namespace CCGMS.view
 
                     command.ExecuteNonQuery();
                 }
+
+                using (var command = new MySqlCommand("SELECT LAST_INSERT_ID();", connection))
+                {
+                    individualRecord.HealthDataID = Convert.ToInt32(command.ExecuteScalar());
+                }
             }
         }
 
@@ -288,6 +296,11 @@ namespace CCGMS.view
 
                     command.ExecuteNonQuery();
                 }
+
+                using (var command = new MySqlCommand("SELECT LAST_INSERT_ID();", connection))
+                {
+                    individualRecord.AdditionalProfileID = Convert.ToInt32(command.ExecuteScalar());
+                }
             }
         }
 
@@ -309,13 +322,14 @@ namespace CCGMS.view
 
                     if (!string.IsNullOrEmpty(name))  // Only save non-empty rows
                     {
-                        string query = @"INSERT INTO tbl_brothers_sisters (
+                        string query = @"INSERT INTO tbl_brothers_sisters (Sub_Id
                     Name, Age, School, Educational_Attainment, Employment_Business_Agency) 
                     VALUES 
-                    (@Name, @Age, @School, @Educational_Attainment, @Employment_Business_Agency)";
+                    (@Sub_Id, @Name, @Age, @School, @Educational_Attainment, @Employment_Business_Agency)";
 
                         using (var command = new MySqlCommand(query, connection))
                         {
+                            command.Parameters.AddWithValue("@Sub_Id", individualRecord.StudentID.ToString());
                             command.Parameters.AddWithValue("@Name", name);
                             command.Parameters.AddWithValue("@Age", age);
                             command.Parameters.AddWithValue("@School", school);
@@ -323,6 +337,11 @@ namespace CCGMS.view
                             command.Parameters.AddWithValue("@Employment_Business_Agency", employment);
 
                             command.ExecuteNonQuery();
+                        }
+
+                        using (var command = new MySqlCommand("SELECT LAST_INSERT_ID();", connection))
+                        {
+                            individualRecord.SiblingsID= Convert.ToInt32(command.ExecuteScalar());
                         }
                     }
                 }
@@ -531,161 +550,11 @@ namespace CCGMS.view
 
         private void iconsubmit_Click(object sender, EventArgs e)
         {
-
-
         }
-
-
-
 
         private void iconSubmit_Click_1(object sender, EventArgs e)
         {
-            var studentRecord = new StudentRecord
-            {
-
-
-                PersonalInfo = new StudentRecord.PersonalData
-                {
-                    StudentId = txtStudentID.Text,
-                    Course = cmbCourse.Text,
-                    Year = int.TryParse(cmbYear.Text, out var year) ? year : 0,
-                    IsNewStudent = chkIsNewStudent.Checked,
-                    IsTransferee = chkIsTransferee.Checked,
-                    IsReEntry = chkIsReEntry.Checked,
-                    IsShifter = chkIsShifter.Checked,
-                    FirstName = txtFirstName.Text,
-                    MiddleName = txtMiddleName.Text,
-                    LastName = txtLastName.Text,
-                    Sex = rbMale.Checked ? "Male" : rbFemale.Checked ? "Female" : null,
-                    Age = int.TryParse(txtAge.Text, out var age) ? age : 0,
-                    // Nickname = txtNickname.Text, // Uncomment if needed
-                    Nationality = txtNationality.Text,
-                    Citizenship = txtCitizenship.Text,
-                    DateOfBirth = dtpDateOfBirth.Value,
-                    PlaceOfBirth = txtPlaceOfBirth.Text,
-                    CivilStatus = txtCivilStatus.Text,
-                    SpouseName = txtCivilStatus.Text == "Married" ? txtSpouseName.Text : null, // Update accordingly
-                    Religion = txtReligion.Text,
-                    ContactNumber = txtContactNumber.Text,
-                    CompleteHomeAddress = txtCompleteHomeAddress.Text,
-                    BoardingHouseAddress = txtBoardingHouseAddress.Text,
-                    LandlordName = txtLandlordName.Text,
-                    GuardianName = txtGuardianName.Text,
-                    EmergencyContact = txtGuardianphone.Text, // If different, update accordingly
-                    Hobbies = txtHobbies.Text,
-                    // Skills = txtSkills.Text // Uncomment if needed
-                }
-            };
-            var fatherData = new FamilyData
-            {
-                Parents = "Father",
-                Name = txtFatherName.Text,
-                TelCellNo = txtFatherPhone.Text,
-                Nationality = txtFatherNationality.Text,
-                EducationalAttainment = txtFatherEducationalAttainment.Text,
-                Occupation = txtFatherOccupation.Text,
-                EmployerAgency = txtFatherEmployerAgency.Text,
-                WorkingAbroad = GetFatherWorkingAbroad(), // Assuming you have radio buttons
-                MaritalStatus = GetFatherMaritalStatus(), // Implement this to return based on your UI
-                MonthlyIncome = GetMonthlyIncome(),
-                NoOfChildren = int.TryParse(txtFatherNoOfChildren.Text, out var fatherChildren) ? fatherChildren : 0,
-                StudentsBirthOrder = int.TryParse(txtFatherBirthOrder.Text, out var fatherBirthOrder) ? fatherBirthOrder : 0,
-                LanguageDialect = txtFatherLanguageDialect.Text,
-                FamilyStructure = GetFamilyStructure(),
-                IndigenousGroup = GetIndigenousGroup(),
-                Beneficiary4Ps = GetBeneficiary4Ps(),
-            };
-
-            var motherData = new FamilyData
-            {
-                Parents = "Mother",
-                Name = txtMotherName.Text,
-                TelCellNo = txtMotherTelCellNo.Text,
-                Nationality = txtMotherNationality.Text,
-                EducationalAttainment = txtMotherEducationalAttainment.Text,
-                Occupation = txtMotherOccupation.Text,
-                EmployerAgency = txtMotherEmployerAgency.Text,
-                WorkingAbroad = GetFatherWorkingAbroad(),
-                MaritalStatus = GetMotherMaritalStatus(), // Similar function for mother
-                MonthlyIncome = GetMonthlyIncome(),
-                NoOfChildren = fatherData.NoOfChildren, // Use the same value as the father
-                StudentsBirthOrder = fatherData.StudentsBirthOrder, // Use the same value as the father
-                LanguageDialect = fatherData.LanguageDialect, // Use the same value as the father
-                FamilyStructure = fatherData.FamilyStructure, // Use the same value as the father
-                IndigenousGroup = fatherData.IndigenousGroup, // Use the same value as the father
-                Beneficiary4Ps = fatherData.Beneficiary4Ps, // Use the same value as the father
-            };
-            var Education = new EducationalData
-            {
-                //EducationalID = EducationalID,
-                ElementaryYearGraduated = ElementaryYearGraduated.Text,
-                ElementaryHonorAwards = ElementaryHonorAwards.Text,
-                Elementary = Elementary.Text,
-                JuniorHighYearGraduated = JuniorHighYearGraduated.Text,
-                JuniorHighHonorAwards = JuniorHighHonorAwards.Text,
-                HighSchool = HighSchool.Text,
-                SeniorHighYearGraduated = SeniorHighYearGraduated.Text,
-                SeniorHighHonorAwards = SeniorHighHonorAwards.Text,
-                SeniorHighSchool = SeniorHighSchool.Text,
-                StrandCompleted = StrandCompleted.Text,
-                VocationalTechnical = VocationalTechnical.Text,
-                SHSAverageGrade = int.TryParse(SHSAverageGrade.Text, out var average) ? average : 0,
-                CollegeIfTransferee = CollegeIfTransferee.Text,
-                FavoriteSubject = FavoriteSubject.Text,
-                WhyFavoriteSubject = WhyFavoriteSubject.Text,
-                LeastFavoriteSubject = LeastFavoriteSubject.Text,
-                WhyLeastFavoriteSubject = WhyLeastFavoriteSubject.Text,
-                SupportForStudies = SupportForStudies.Text,
-                Membership = Membership.Text,
-                LeftRightHanded = Gethand()
-            };
-
-            //var siblingdata = new Sibling
-            //{
-            //    Name = txtSiblingName.Text,
-            //    Age = int.TryParse(txtSiblingAge.Text, out var age) ? age : 0,
-            //    School = txtSiblingSchool.Text,
-            //    EducationalAttainment = txtSiblingEducationalAttainment.Text,
-            //    EmploymentBusinessAgency = txtSiblingEmployment.Text
-            //};
-
-
-
-
-            // Create health data object
-            var healthData = new HealthData
-            {
-                SickFrequency = GetSickFrequency(),
-                HealthProblems = GetHealthProblems(),
-                PhysicalDisabilities = GetPhysicalDisabilities()
-            };
-            var additionalProfileData = new AdditionalProfile
-            {
-                GenderIdentity = GetGenderIdentity(),
-                GenderExpression = GetGenderExpression(),
-                GenderSexuallyAttracted = GetGenderSexuallyAttracted(),
-                HasScholarship = GetHasScholarship(),
-                ScholarshipName = txtScholarshipName.Text,
-            };
-            //var sibling = new Sibling
-            //{
-
-            //};
-
-            try
-            {
-                SaveStudentRecord(studentRecord);
-                SaveFamilyData(new StudentRecord { Father = fatherData, Mother = motherData });
-                SaveSiblingsData(studentRecord);  // Save siblings dynamically
-                SaveEducationalRecord(Education);
-                SaveHealthData(healthData);
-                SaveAdditionalProfile(additionalProfileData);
-                MessageBox.Show("Record saved successfully!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error saving student record: {ex.Message}");
-            }
+        
         }
 
         private void enrollment_Load(object sender, EventArgs e)
@@ -699,17 +568,9 @@ namespace CCGMS.view
 
             var studentRecord = new StudentRecord
             {
-
-
+               
                 PersonalInfo = new StudentRecord.PersonalData
                 {
-                    StudentId = txtStudentID.Text,
-                    Course = cmbCourse.Text,
-                    Year = int.TryParse(cmbYear.Text, out var year) ? year : 0,
-                    IsNewStudent = chkIsNewStudent.Checked,
-                    IsTransferee = chkIsTransferee.Checked,
-                    IsReEntry = chkIsReEntry.Checked,
-                    IsShifter = chkIsShifter.Checked,
                     FirstName = txtFirstName.Text,
                     MiddleName = txtMiddleName.Text,
                     LastName = txtLastName.Text,
@@ -828,6 +689,16 @@ namespace CCGMS.view
             //{
 
             //};
+
+            individualRecord = new IndividualRecord();
+
+            individualRecord.StudentID = int.TryParse(txtStudentID.Text, out var studentId) ? studentId : 0;
+            individualRecord.Course = cmbCourse.Text;
+            individualRecord.Year = int.TryParse(cmbYear.Text, out var year) ? year : 0;
+            individualRecord.IsNewStudent = chkIsNewStudent.Checked;
+            individualRecord.IsTransferree = chkIsTransferee.Checked;
+            individualRecord.IsReentry = chkIsReEntry.Checked;
+            individualRecord.IsShifter = chkIsShifter.Checked;
 
             try
             {

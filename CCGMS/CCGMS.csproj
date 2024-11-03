@@ -355,6 +355,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="COUNSELING.ico" />
+    <None Include="Resources\delete_trash_96px.png" />
+    <None Include="Resources\eye_96px.png" />
+    <None Include="Resources\pencil_96px.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

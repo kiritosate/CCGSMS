@@ -14,7 +14,7 @@ namespace CCGMS.docs
     internal class Word_Modifier
     {
         // Method to modify the Word document template and save it to a new file
-        private void ModifyWordDocument(string filePath)
+        public void ModifyWordDocument(string filePath)
         {
             using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(filePath, true))
             {
@@ -22,14 +22,14 @@ namespace CCGMS.docs
 
                 // Dictionary of placeholders and their values
                 var replacements = new Dictionary<string, string>
-        {
-            { "id_no", "KiritoSate" },
-            { "course_year", "BSIT 4" },
-            { "O_1", "0" },
-            { "O_2", "1" },
-            { "O_3", "1" },
-            { "O_4", "1" }
-        };
+                {
+                    { "id_no", "KiritoSate" },
+                    { "course_year", "BSIT 4" },
+                    { "O_1", "0" },
+                    { "O_2", "1" },
+                    { "O_3", "1" },
+                    { "O_4", "1" }
+                };
 
                 // Replace all placeholders in the document
                 foreach (var item in replacements)
@@ -112,56 +112,6 @@ namespace CCGMS.docs
             }
         }
 
-
-        private void ReplacePlaceholder(Body documentBody, string placeholder, string replacementValue)
-        {
-            // Iterate through all paragraphs in the document
-            foreach (var paragraph in documentBody.Descendants<Paragraph>())
-            {
-                StringBuilder combinedText = new StringBuilder();
-                List<Text> textElements = new List<Text>();
-
-                // Collect all text elements and combine their text content
-                foreach (var run in paragraph.Descendants<Run>())
-                {
-                    foreach (var text in run.Descendants<Text>())
-                    {
-                        combinedText.Append(text.Text);
-                        textElements.Add(text); // Keep track of the text elements
-                    }
-                }
-
-                // Check if the combined text contains the placeholder
-                if (combinedText.ToString().Contains(placeholder))
-                {
-                    // Replace the placeholder in the combined text
-                    string newCombinedText = combinedText.ToString().Replace(placeholder, replacementValue);
-
-                    // Redistribute the new combined text back into the original text elements
-                    int currentIndex = 0;
-
-                    foreach (var text in textElements)
-                    {
-                        // Determine the length of the current text element
-                        int textLength = text.Text.Length;
-
-                        // Check if there's enough remaining text to fill this element
-                        if (currentIndex + textLength <= newCombinedText.Length)
-                        {
-                            text.Text = newCombinedText.Substring(currentIndex, textLength);
-                            currentIndex += textLength;
-                        }
-                        else
-                        {
-                            // If the remaining text is less than the length of the element, fill it with the rest
-                            text.Text = newCombinedText.Substring(currentIndex);
-                            break; // Stop when all the new text is applied
-                        }
-                    }
-                }
-            }
-        }
-
         public void ModifyAndPrintDocument()
         {
             // Get the current directory where the executable or project is running
@@ -196,12 +146,15 @@ namespace CCGMS.docs
             try
             {
                 // Start the process to print the document
-                Process.Start(info);
+                using (var process = Process.Start(info))
+                {
+                    process.WaitForExit(); // Optionally wait for the process to exit
+                }
             }
             catch (Exception ex)
             {
                 // Handle printing errors (e.g., if no default printer is set)
-                Console.WriteLine("Error printing document: " + ex.Message);
+                MessageBox.Show("Error printing document: " + ex.Message);
             }
         }
     }
